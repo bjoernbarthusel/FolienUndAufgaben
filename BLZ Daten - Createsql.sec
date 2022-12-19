@@ -1,0 +1,33 @@
+USE [NETDB]
+GO
+
+CREATE TABLE BLZTabelle
+(
+	[BLZ] [nvarchar](50) NULL,
+	[Merkmal] [smallint] NULL,
+	[Bezeichnung] [varchar](58) NULL,
+	[PLZ] [int] NULL,
+	[Ort] [varchar](35) NULL,
+	[Kurzbezeichnung] [varchar](27) NULL,
+	[PAN] [int] NULL,
+	[BIC] [varchar](11) NULL,
+	[Pruefzifferberechnungsmethode] [varchar](2) NULL,
+	[Datensatznummer] [int] NULL,
+	[Aenderungskennzeichen] [varchar](1) NULL,
+	[Bankleitzahlloeschung] [smallint] NULL,
+	[NachfolgeBLZ] [nvarchar](50) NULL
+);
+GO
+BULK INSERT BLZTabelle
+FROM 'C:\Import\BLZ-Daten.csv'
+WITH
+(
+	CODEPAGE = 'ACP',
+	FIELDTERMINATOR = '|',
+	FIRSTROW = 2
+);
+GO
+ALTER TABLE BLZTabelle ADD ID INT IDENTITY(1,1) NOT NULL;
+GO
+ALTER TABLE BLZTabelle ADD CONSTRAINT PK_BLZDaten PRIMARY KEY(ID);
+GO

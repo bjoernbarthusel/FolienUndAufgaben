@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+
+namespace Kontakte_mit_DI.Models
+{
+    public class KontaktVerwaltungDB
+    {
+        public List<Kontakt> AlleKontakte { get; }
+
+        private const string connString = @"Data Source=.\SQLEXPRESS;Initial Catalog=NETDB;Integrated Security=true;";
+
+        public KontaktVerwaltungDB()
+        {
+            AlleKontakte = new List<Kontakt>();
+
+            KontakteLaden();
+        }
+
+        public string KontaktEinfügen(Kontakt neuerKontakt)
+        {
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    SqlCommand sql = connection.CreateCommand();
+
+                    sql.CommandText = "INSERT INTO tblKontakt (Name, Vorname, Telefon, EMail) VALUES" +
+                                      string.Format("('{0}','{1}','{2}','{3}')", neuerKontakt.Nachname, neuerKontakt.Vorname, neuerKontakt.Telefon, neuerKontakt.EMail);
+
+                    sql.ExecuteNonQuery();
+
+                    return "Datensatz eingefügt";
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
+            }
+        }
+
+        public string KontakteLaden()
+        {
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    SqlCommand sql = connection.CreateCommand();
+                    sql.CommandText = "SELECT * FROM tblKontakt";
+                    SqlDataReader reader = sql.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        AlleKontakte.Add(new Kontakt()
+                        {
+                            Vorname = reader.GetString(1),
+                            Nachname = reader.GetString(2),
+                            Telefon = reader.GetString(3),
+                            EMail = reader.GetString(4)
+                        });
+                    }
+                    reader.Close();
+
+                    return string.Empty;
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
+            }
+        }
+    }
+}

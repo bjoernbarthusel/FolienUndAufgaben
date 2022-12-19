@@ -1,0 +1,23 @@
+USE [NETDB];
+GO
+CREATE TABLE Film
+(
+   ID              INT            IDENTITY PRIMARY KEY,
+   TITEL           NVARCHAR(100)  NOT NULL
+);
+GO
+INSERT INTO Film (TITEL) VALUES (N'Star Wars'), (N'Star Trek'), (N'Galaxy Quest');
+GO
+CREATE TABLE FilmAbstimmung
+(
+   ID              INT            IDENTITY PRIMARY KEY,
+   FilmID	   INT            NOT NULL,
+   Note		   NVARCHAR(15)   NOT NULL
+);
+GO
+ALTER TABLE FilmAbstimmung ADD CONSTRAINT FK_FILM
+FOREIGN KEY (FilmID) REFERENCES Film(ID) ON DELETE CASCADE;
+GO
+INSERT INTO FilmAbstimmung (FilmID, Note)
+VALUES (1, N'sehr gut'), (2, N'gut'), (3, N'befriedigend');
+GO

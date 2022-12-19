@@ -1,0 +1,65 @@
+USE [NETDB]
+GO
+CREATE TABLE [dbo].[tblKontakt](
+	[KontaktID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Vorname] [varchar](100) NOT NULL,
+	[Telefon] [varchar](25) NOT NULL,
+	[EMail] [varchar](255) NOT NULL,
+PRIMARY KEY NONCLUSTERED 
+(
+	[KontaktID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE PROCEDURE usp_select_contacts
+AS
+BEGIN
+	SELECT
+		KontaktID,
+		Name,
+		Vorname,
+		Telefon,
+		EMail
+	FROM
+		tblKontakt
+END
+GO
+CREATE PROCEDURE usp_delete_contact
+	@KontaktID	INT
+AS
+BEGIN
+	DELETE FROM tblKontakt
+	WHERE KontaktID	= @KontaktID;
+END
+GO
+CREATE PROCEDURE usp_insert_contact
+		@Name			VARCHAR(100),
+		@Vorname		VARCHAR(100),
+		@Telefon		VARCHAR(25),
+		@EMail			VARCHAR(255)
+AS
+BEGIN
+	INSERT INTO tblKontakt
+	(Name, Vorname, Telefon, Email)
+	VALUES 
+	(@Name, @Vorname, @Telefon, @Email);
+END
+GO
+CREATE PROCEDURE usp_update_contact
+		@KontaktID		INT,
+		@Name			VARCHAR(100),
+		@Vorname		VARCHAR(100),
+		@Telefon		VARCHAR(25),
+		@EMail			VARCHAR(255)
+AS
+BEGIN
+	UPDATE tblKontakt
+	SET 
+		Name	= @Name, 
+		Vorname = @Vorname, 
+		Telefon = @Telefon, 
+		Email	= @EMail
+	WHERE KontaktID	= @KontaktID;
+END
+GO

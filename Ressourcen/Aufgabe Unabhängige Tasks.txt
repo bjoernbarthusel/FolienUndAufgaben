@@ -1,0 +1,7 @@
+Aufgabe – unabhängige Tasks
+Erstellen Sie ein Verzeichnis mit dem Namen „Texte“ auf dem Laufwerk D: oder C:, sofern noch nicht vorhanden. Kopieren Sie einige kleine Text-Dateien in das Verzeichnis. In einzelnen, unabhängigen Tasks soll die Buchstabenhäufigkeit für jede Datei ermittelt werden.
+Erstellen Sie dazu eine Methode die für einen gegebenen Dateipfad folgendes leistet:
+1. Der Inhalt der Datei mit dem angegebenen Pfad wird ausgelesen und die Häufigkeit der Buchstaben in der Datei bestimmt.
+2. Die Häufigkeitstabelle für die Datei wird auf der Konsole ausgegeben.
+Erstellen Sie im Hauptprogramm eine Schleife, die für jede der Dateien in dem Verzeichnis die Berechnung der Häufigkeit in einem eigenen Task durchführt.
+Erweitern Sie die Anwendung so, dass die Häufigkeit nicht nur auf die Konsole geschrieben wird, sondern auch in eine Datei. Für jede Eingabedatei, soll eine Ausgabedatei mit der Endung „.freq“ (frequency) erstellt werden.

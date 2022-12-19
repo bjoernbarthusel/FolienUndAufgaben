@@ -1,0 +1,12 @@
+﻿HDD;129,00;Hardware
+Core i3;88,00;Hardware
+Core i5;131,00;Hardware
+Core i7;329,00;Hardware 
+Radeon X264526;439,00;Hardware
+GForce 312222;329,00;Hardware
+Office 2010;350.0;Software 
+Office 2011 (Mac);360.0;Software
+Visual Studio 2010;1350.0;Software
+SQL Server 2012;2350.0;Software
+Windows Phone 7;765,0;Mobile
+Zune;465,0;Mobile 
